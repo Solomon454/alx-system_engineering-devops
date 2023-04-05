@@ -5,6 +5,6 @@
 #sudo sed -i 's/server_name _;.*/server_name _;\n\tadd_header X-Served-By \$hostname;/' /etc/nginx/sites-enabled/default
 sudo apt-get -y update
 sudo apt-get -y install nginx
-
+waw=$(hostname)
 # code to configure and add header to display hostname
-sudo sed -i "\\\tadd_header X-Served-By \$hostname;" /etc/nginx/sites-enabled/default
+new_string="server {\n\tadd_header X-Served-By $waw;" /etc/nginx/sites-enabled/default
