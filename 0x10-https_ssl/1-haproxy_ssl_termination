@@ -33,17 +33,16 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend mysolomon.tech-frontend
+frontend mysolomon.tech-http
         bind *:80
         mode http
-	http-request redirect scheme https code 301 unless { ssl_fc }
         http-request set-header X_Forwarded-Proto http
         default_backend mysolomon.tech-backend
 
 frontend mysolomon.tech-frontend-https
          bind *:443 ssl crt /etc/haproxy/certs/www.mysolomon.tech.pem
          http-request set-header X-Forwarded-Proto https
-         default_backend mysolomon.tech-backend
+        default_backend mysolomon.tech-backend
 
 backend mysolomon.tech-backend
         balance roundrobin
